@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dos Donas y una Taza de Café – Viña del Mar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coffee:    #2C1810;
+    --espresso:  #1a0f0a;
+    --mahogany:  #4A2315;
+    --caramel:   #C17D3C;
+    --cream:     #F5EDD8;
+    --foam:      #FBF5E8;
+    --turquoise: #1E9E8E;
+    --iznik:     #2ABFAB;
+    --tile:      #0D6E63;
+    --gold:      #D4A853;
+    --rust:      #A83E2A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', serif;
+    background: var(--espresso);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ─── ARABESQUE BG PATTERN ─────────────────────── */
+  .arabesque-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .045;
+    background-image:
+      repeating-linear-gradient(45deg, var(--turquoise) 0 1px, transparent 0 30px),
+      repeating-linear-gradient(-45deg, var(--turquoise) 0 1px, transparent 0 30px);
+    background-size: 42px 42px;
+  }
+
+  /* ─── NAVBAR ────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 999;
+    background: rgba(26,15,10,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,168,83,.25);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .85rem 5%;
+    transition: background .3s;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--gold);
+    letter-spacing: .02em; line-height: 1.2;
+  }
+  .nav-brand span { display: block; font-size: .65rem; font-family: 'Montserrat', sans-serif; color: var(--iznik); letter-spacing: .15em; font-weight: 600; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Montserrat', sans-serif; font-size: .78rem; font-weight: 600;
+    color: var(--cream); text-decoration: none; letter-spacing: .08em; text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--iznik); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--cream); border-radius: 2px; transition: .3s; }
+
+  /* ─── HERO ──────────────────────────────────────── */
+  #inicio {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    background: radial-gradient(ellipse at 30% 60%, #3B1C0E 0%, var(--espresso) 70%);
+    padding: 8rem 5% 5rem;
+  }
+  .hero-decor {
+    position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
+  }
+  .hero-decor.a { width: 500px; height: 500px; background: rgba(30,158,142,.12); top: -100px; right: -100px; }
+  .hero-decor.b { width: 350px; height: 350px; background: rgba(193,125,60,.14); bottom: 0; left: -80px; }
+
+  /* Geometric tile border top */
+  #inicio::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 6px;
+    background: repeating-linear-gradient(90deg, var(--turquoise), var(--gold) 25%, var(--rust) 50%, var(--gold) 75%, var(--turquoise) 100%);
+  }
+
+  .hero-inner {
+    position: relative; z-index: 1; max-width: 800px;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif; font-size: .75rem; font-weight: 700;
+    letter-spacing: .25em; color: var(--iznik); text-transform: uppercase;
+    display: flex; align-items: center; gap: .75rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; flex: 1 1 40px; max-width: 60px; height: 1px; background: var(--iznik); opacity: .6;
+  }
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--foam);
+    text-shadow: 0 4px 30px rgba(0,0,0,.5);
+  }
+  h1 em {
+    font-style: italic; font-family: 'Playfair Display', serif;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 1.1rem; color: rgba(245,237,216,.7); max-width: 540px; line-height: 1.7;
+  }
+  .btn-cta {
+    display: inline-block; padding: .9rem 2.4rem;
+    background: var(--turquoise); color: #fff;
+    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .85rem; letter-spacing: .1em;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 3px; border: none; cursor: pointer;
+    position: relative; overflow: hidden;
+    transition: background .25s, transform .2s, box-shadow .25s;
+    box-shadow: 0 8px 24px rgba(30,158,142,.35);
+  }
+  .btn-cta::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.15) 50%, transparent 100%);
+    transform: translateX(-100%); transition: transform .4s;
+  }
+  .btn-cta:hover { background: var(--tile); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(30,158,142,.45); }
+  .btn-cta:hover::after { transform: translateX(100%); }
+
+  /* Nazar eye deco */
+  .nazar {
+    font-size: 3rem; opacity: .15; position: absolute;
+    user-select: none; pointer-events: none;
+    animation: floatY 6s ease-in-out infinite;
+  }
+  .nazar.n1 { top: 15%; right: 8%; animation-delay: 0s; }
+  .nazar.n2 { bottom: 20%; right: 20%; animation-delay: 2s; font-size: 1.8rem; }
+  @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+  /* ─── SECTION BASE ──────────────────────────────── */
+  section { position: relative; z-index: 1; }
+  .section-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 5%; }
+  .section-label {
+    font-family: 'Montserrat', sans-serif; font-size: .7rem; font-weight: 700;
+    letter-spacing: .25em; color: var(--iznik); text-transform: uppercase;
+    margin-bottom: .6rem;
+  }
+  .section-title {
+    font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900; color: var(--foam); line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .section-title em { font-family: 'Playfair Display', serif; color: var(--gold); font-weight: 400; }
+  .divider {
+    width: 60px; height: 3px; margin-bottom: 2.5rem;
+    background: linear-gradient(90deg, var(--turquoise), var(--gold));
+    border-radius: 2px;
+  }
+
+  /* ─── HISTORIA ──────────────────────────────────── */
+  #historia { background: linear-gradient(160deg, #1f0e08 0%, #0d1a17 100%); }
+  .historia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .historia-text p { color: rgba(245,237,216,.8); line-height: 1.85; margin-bottom: 1rem; font-size: 1.05rem; }
+  .historia-text p strong { color: var(--gold); }
+  .historia-visual {
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .cezve-art {
+    width: 260px; height: 260px; position: relative;
+  }
+  .cezve-art svg { width: 100%; height: 100%; filter: drop-shadow(0 0 30px rgba(30,158,142,.35)); }
+  .tile-ring {
+    position: absolute; inset: -20px; border-radius: 50%;
+    border: 2px solid rgba(42,191,171,.2);
+    animation: spinSlow 20s linear infinite;
+  }
+  .tile-ring::before {
+    content: '✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦'; color: var(--gold); font-size: .5rem;
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    letter-spacing: 1rem; white-space: nowrap; opacity: .4;
+  }
+  @keyframes spinSlow { to { transform: rotate(360deg); } }
+
+  /* ─── ARENA FEATURE ─────────────────────────────── */
+  #arena {
+    background: var(--mahogany);
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(42,191,171,.08) 0%, transparent 70%);
+  }
+  .arena-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .arena-badge {
+    background: linear-gradient(135deg, var(--coffee), #3a1e10);
+    border: 1px solid rgba(212,168,83,.3);
+    border-radius: 12px; padding: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .arena-badge::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: rgba(42,191,171,.08);
+  }
+  .sand-icon { font-size: 4rem; margin-bottom: 1rem; display: block; }
+  .arena-badge h3 {
+    font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 800;
+    color: var(--gold); margin-bottom: .75rem;
+  }
+  .arena-badge p { color: rgba(245,237,216,.75); line-height: 1.75; }
+  .steps { display: flex; flex-direction: column; gap: 1.2rem; }
+  .step { display: flex; gap: 1rem; align-items: flex-start; }
+  .step-num {
+    flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--turquoise), var(--tile));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .9rem; color: #fff;
+  }
+  .step p { color: rgba(245,237,216,.8); line-height: 1.65; font-size: .95rem; padding-top: .35rem; }
+  .step p strong { color: var(--cream); }
+
+  /* ─── MENÚ ──────────────────────────────────────── */
+  #menu { background: linear-gradient(160deg, var(--espresso) 0%, #0f1d1b 100%); }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; }
+  .menu-card {
+    background: linear-gradient(160deg, #251008, #0e1f1c);
+    border: 1px solid rgba(42,191,171,.15);
+    border-radius: 10px; padding: 2rem 1.8rem;
+    position: relative; overflow: hidden;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+    cursor: default;
+  }
+  .menu-card::before {
+    content: ''; position: absolute; inset: 0; opacity: 0;
+    background: linear-gradient(135deg, rgba(30,158,142,.1) 0%, transparent 60%);
+    transition: opacity .3s;
+  }
+  .menu-card:hover { transform: translateY(-6px); border-color: rgba(42,191,171,.45); box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+  .menu-card:hover::before { opacity: 1; }
+  .card-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .card-tag {
+    font-family: 'Montserrat', sans-serif; font-size: .65rem; font-weight: 700;
+    letter-spacing: .2em; color: var(--iznik); text-transform: uppercase; margin-bottom: .4rem;
+  }
+  .menu-card h3 {
+    font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800;
+    color: var(--foam); margin-bottom: .6rem;
+  }
+  .menu-card p { color: rgba(245,237,216,.65); font-size: .9rem; line-height: 1.7; }
+  .card-price {
+    margin-top: 1.2rem; font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem; font-weight: 800; color: var(--gold);
+  }
+  .badge-sand {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--turquoise); color: #fff;
+    font-family: 'Montserrat', sans-serif; font-size: .6rem; font-weight: 700;
+    letter-spacing: .1em; padding: .25rem .6rem; border-radius: 20px; text-transform: uppercase;
+  }
+
+  /* ─── CONTACTO ──────────────────────────────────── */
+  #contacto {
+    background: var(--coffee);
+    background-image:
+      radial-gradient(circle at 80% 50%, rgba(42,191,171,.08), transparent 50%),
+      radial-gradient(circle at 20% 50%, rgba(212,168,83,.06), transparent 50%);
+  }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-info h3 {
+    font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 800;
+    color: var(--gold); margin-bottom: .5rem;
+  }
+  .contact-info p, .contact-info address {
+    color: rgba(245,237,216,.75); line-height: 1.8; font-style: normal; font-size: .95rem;
+  }
+  .contact-block { margin-bottom: 2rem; }
+  .contact-icon { font-size: 1.5rem; margin-bottom: .4rem; display: block; }
+  .hours-table { width: 100%; border-collapse: collapse; margin-top: .5rem; }
+  .hours-table td {
+    padding: .35rem 0; color: rgba(245,237,216,.75); font-size: .9rem;
+  }
+  .hours-table td:last-child { text-align: right; color: var(--iznik); font-weight: 600; font-family: 'Montserrat', sans-serif; }
+  .map-placeholder {
+    background: linear-gradient(135deg, #1a1208, #0b1914);
+    border: 1px solid rgba(42,191,171,.2); border-radius: 10px;
+    height: 280px; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem; position: relative; overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: ''; position: absolute;
+    inset: 0; opacity: .12;
+    background: repeating-linear-gradient(0deg, var(--turquoise) 0 1px, transparent 0 30px),
+                repeating-linear-gradient(90deg, var(--turquoise) 0 1px, transparent 0 30px);
+  }
+  .map-placeholder .pin { font-size: 3rem; }
+  .map-placeholder p { color: var(--iznik); font-family: 'Montserrat', sans-serif; font-size: .85rem; font-weight: 700; letter-spacing: .08em; z-index: 1; }
+  .map-placeholder span { color: rgba(245,237,216,.5); font-size: .8rem; z-index: 1; text-align: center; }
+
+  /* ─── FOOTER ────────────────────────────────────── */
+  footer {
+    background: var(--espresso);
+    border-top: 1px solid rgba(212,168,83,.15);
+    text-align: center; padding: 2.5rem 5%;
+  }
+  .footer-slogan {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem;
+    color: var(--gold); margin-bottom: .5rem;
+  }
+  footer p { color: rgba(245,237,216,.35); font-size: .8rem; font-family: 'Montserrat', sans-serif; }
+  .footer-nav { display: flex; justify-content: center; gap: 2rem; margin: 1rem 0; flex-wrap: wrap; }
+  .footer-nav a { color: rgba(245,237,216,.5); text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; transition: color .2s; }
+  .footer-nav a:hover { color: var(--iznik); }
+
+  /* ─── SCROLL ANIMATIONS ─────────────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─────────────────────────────────── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(26,15,10,.97); padding: 1.5rem 5%; gap: 1.2rem; border-bottom: 1px solid rgba(212,168,83,.2); }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    .historia-grid, .arena-inner, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .historia-visual { order: -1; }
+    .cezve-art { width: 180px; height: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="arabesque-bg"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-brand">
+    Dos Donas y una Taza de Café
+    <span>☕ Viña del Mar — Est. 2024</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#arena">Café en Arena</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-decor a"></div>
+  <div class="hero-decor b"></div>
+  <div class="nazar n1">🧿</div>
+  <div class="nazar n2">🧿</div>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Viña del Mar · V Región · Chile</p>
+    <h1>El alma de <em>Estambul</em><br>frente al mar de Viña</h1>
+    <p class="hero-sub">
+      El mejor café turco de la V Región — preparado a la antigua usanza, sobre arena caliente, con el aroma del Pacífico entrando por la ventana. <strong style="color:var(--gold)">¡Ya po, un cafecito!</strong>
+    </p>
+    <div>
+      <a href="#menu" class="btn-cta">Ver el menú →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section id="historia">
+  <div class="section-wrap">
+    <div class="historia-grid">
+      <div class="historia-text reveal">
+        <p class="section-label">Nuestra Historia</p>
+        <h2 class="section-title">Dos mundos,<br>una <em>taza</em></h2>
+        <div class="divider"></div>
+        <p>Todo comenzó con dos locas que se enamoraron del café turco mientras <strong>mochileaban por Estambul</strong>. Volvieron a Viña con un cezve bajo el brazo y una idea medio loca: ¿y si traemos ese ritual milenario al borde del Pacífico?</p>
+        <p>Así nació <strong>"Dos Donas y una Taza de Café"</strong> — un rincón donde la tradición otomana del <em>cezve</em> se encuentra con la <strong>once chilena</strong> de toda la vida. Un lugar donde el tiempo se detiene, igual que en los viejos cafés de Sultanahmet.</p>
+        <p>Estamos en Reñaca, frente al mar. Las gaviotas gritan afuera y adentro suena music turca suavecita. <strong>¿Hay algo más rico, o no?</strong></p>
+      </div>
+      <div class="historia-visual reveal">
+        <div class="cezve-art">
+          <div class="tile-ring"></div>
+          <!-- SVG Cezve (Turkish coffee pot) -->
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cup/Cezve body -->
+            <ellipse cx="100" cy="145" rx="42" ry="8" fill="rgba(42,191,171,0.15)"/>
+            <path d="M68 140 L72 90 Q100 80 128 90 L132 140 Q100 148 68 140Z" fill="#4A2315" stroke="#D4A853" stroke-width="1.5"/>
+            <!-- Cezve spout -->
+            <path d="M128 100 Q152 95 158 88 Q162 82 155 80 Q148 78 140 84 L132 92" fill="#4A2315" stroke="#D4A853" stroke-width="1.5"/>
+            <!-- Handle -->
+            <path d="M72 105 Q50 100 48 90 Q46 80 56 78 Q64 76 68 84" fill="none" stroke="#D4A853" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Coffee surface -->
+            <ellipse cx="100" cy="90" rx="28" ry="7" fill="#1a0f0a" stroke="#C17D3C" stroke-width="1"/>
+            <!-- Steam -->
+            <path d="M90 76 Q87 68 90 60 Q93 52 90 44" stroke="rgba(245,237,216,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M100 74 Q97 64 100 56 Q103 48 100 40" stroke="rgba(245,237,216,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M110 76 Q107 68 110 60 Q113 52 110 44" stroke="rgba(245,237,216,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Iznik tile motif on body -->
+            <circle cx="100" cy="118" r="8" fill="none" stroke="rgba(42,191,171,0.5)" stroke-width="1"/>
+            <path d="M100 110 L100 126 M92 118 L108 118" stroke="rgba(42,191,171,0.4)" stroke-width=".8"/>
+            <!-- Decorative band -->
+            <path d="M72 96 Q100 90 128 96" stroke="rgba(212,168,83,0.5)" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAFÉ EN ARENA -->
+<section id="arena">
+  <div class="section-wrap">
+    <div class="arena-inner">
+      <div class="arena-badge reveal">
+        <span class="sand-icon">⏳</span>
+        <h3>Café sobre Arena</h3>
+        <p>
+          La técnica más antigua del mundo: el cezve hundido en arena caliente a 170°C. El café no hierve, <em>se despierta</em>. Lentamente. Con toda la paciencia que la costa chilena enseña. El resultado es una taza con crema espesa, sabor profundo y un final que te abraza.
+        </p>
+      </div>
+      <div class="steps reveal">
+        <p class="section-label">¿Cómo se hace?</p>
+        <h2 class="section-title" style="font-size:1.8rem;">El ritual del <em>Kum Kahvesi</em></h2>
+        <div class="divider"></div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <p><strong>El café:</strong> Molido extrafino, tipo harina. Mezclamos granos traídos desde Turquía con café de altura de Chiapas. ¡Una fusión de impacto!</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p><strong>La arena:</strong> Arena volcánica calentada a 170°C. El cezve se hunde y el café sube lentamente, creando una crema perfecta.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p><strong>El momento:</strong> Se sirve en pocillo de cobre con un vasito de agua fría y un <strong>lokum (Turkish Delight)</strong>. Siéntate, mira el mar, y… <em>Afiyet Olsun, pe</em>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENÚ -->
+<section id="menu">
+  <div class="section-wrap">
+    <p class="section-label reveal">Nuestras Especialidades</p>
+    <h2 class="section-title reveal">El <em>Menú</em> Estrella</h2>
+    <div class="divider reveal"></div>
+
+    <div class="menu-grid">
+
+      <div class="menu-card reveal">
+        <span class="badge-sand">⭐ Top</span>
+        <span class="card-icon">☕</span>
+        <p class="card-tag">Especialidad de la Casa</p>
+        <h3>Café Turco Original<br>en Arena</h3>
+        <p>El clásico <em>Türk Kahvesi</em>, preparado con nuestra técnica de arena caliente. Servido en cezve de cobre con lokum de rosa y agua mineral. Una experiencia, no solo un café.</p>
+        <div class="card-price">$3.800 CLP</div>
+      </div>
+
+      <div class="menu-card reveal">
+        <span class="card-icon">🌶️</span>
+        <p class="card-tag">Oriente Exprés</p>
+        <h3>Café con Especias del Oriente</h3>
+        <p>Nuestro cezve al que le sumamos cardamomo verde, canela de Ceylán y un toque de pimienta de Jamaica. Cremoso, cálido y con un picardía que te despierta de a poco. <strong>¡Un descubrimiento!</strong></p>
+        <div class="card-price">$4.200 CLP</div>
+      </div>
+
+      <div class="menu-card reveal">
+        <span class="card-icon">🍩</span>
+        <p class="card-tag">Tradicionales</p>
+        <h3>Donas con Miel y Pistacho</h3>
+        <p>Nuestras donas artesanales, bañadas en miel de azahar importada de Turquía, con pistachos triturados y espolvoreadas con semillas de sésamo. El maridaje perfecto con el café.</p>
+        <div class="card-price">$2.500 CLP</div>
+      </div>
+
+      <div class="menu-card reveal">
+        <span class="card-icon">🧊</span>
+        <p class="card-tag">Para el verano</p>
+        <h3>Café Turco Frío (Soğuk Kahve)</h3>
+        <p>¿Hace calor en Reñaca? El mismo café turco original, enfriado lentamente y servido sobre hielo con leche de avena y un toque de vainilla. Refrescante pero con toda la profundidad del cezve.</p>
+        <div class="card-price">$4.500 CLP</div>
+      </div>
+
+      <div class="menu-card reveal">
+        <span class="card-icon">🍵</span>
+        <p class="card-tag">Para los que no toman café</p>
+        <h3>Té Turco (Çay) con Narghile Herbs</h3>
+        <p>Té negro de Rize, Turquía, servido en el clásico vaso de tulipán de vidrio. Acompañado de menta fresca del jardín y terrones de azúcar artesanal de caña. ¡Una delicia, po!</p>
+        <div class="card-price">$2.900 CLP</div>
+      </div>
+
+      <div class="menu-card reveal">
+        <span class="card-icon">🥐</span>
+        <p class="card-tag">Once Chileno-Otomano</p>
+        <h3>Simit con Manjar y Queso</h3>
+        <p>El pan de sésamo turco — el <em>simit</em> — relleno con manjar chileno y queso crema. Una fusión que no debería funcionar pero que te vuela la cabeza. Palabra de donas.</p>
+        <div class="card-price">$3.200 CLP</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-wrap">
+    <p class="section-label reveal">¿Dónde estamos?</p>
+    <h2 class="section-title reveal"><em>Encuéntranos</em> en Reñaca</h2>
+    <div class="divider reveal"></div>
+
+    <div class="contact-grid">
+      <div>
+        <div class="contact-block reveal">
+          <span class="contact-icon">📍</span>
+          <h3>Dirección</h3>
+          <address>
+            Avenida Perú 1420, Local 4<br>
+            Reñaca, Viña del Mar<br>
+            V Región de Valparaíso, Chile
+          </address>
+        </div>
+        <div class="contact-block reveal">
+          <span class="contact-icon">🕐</span>
+          <h3>Horarios</h3>
+          <table class="hours-table">
+            <tr><td>Lunes a Viernes</td><td>08:30 – 21:00</td></tr>
+            <tr><td>Sábados</td><td>09:00 – 23:00</td></tr>
+            <tr><td>Domingos</td><td>10:00 – 20:00</td></tr>
+          </table>
+        </div>
+        <div class="contact-block reveal">
+          <span class="contact-icon">📱</span>
+          <h3>Contáctanos</h3>
+          <p>
+            WhatsApp: <strong style="color:var(--iznik)">+56 9 8765 4321</strong><br>
+            Instagram: <strong style="color:var(--iznik)">@dosdonautazadecafe</strong><br>
+            Email: hola@dosdonautaza.cl
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="map-placeholder">
+          <span class="pin">📍</span>
+          <p>Reñaca, Viña del Mar</p>
+          <span>Avenida Perú 1420 · Frente al mar</span>
+        </div>
+        <div style="margin-top:1.5rem; padding:1.5rem; background:rgba(30,158,142,.08); border:1px solid rgba(42,191,171,.2); border-radius:8px;">
+          <p style="font-family:'Montserrat',sans-serif; font-size:.85rem; color:var(--iznik); font-weight:700; margin-bottom:.5rem;">🚌 ¿Cómo llegar?</p>
+          <p style="color:rgba(245,237,216,.65); font-size:.9rem; line-height:1.6;">
+            Micro 3 o 601 desde el centro de Viña. Bajada "Avenida Perú con Brasil". Caminando desde la playa de Reñaca: 3 minutos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-slogan">Afiyet Olsun · ¡Buen provecho, pe! 🧿☕</p>
+  <nav class="footer-nav">
+    <a href="#inicio">Inicio</a>
+    <a href="#historia">Historia</a>
+    <a href="#arena">Café en Arena</a>
+    <a href="#menu">Menú</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <p>© 2024 Dos Donas y una Taza de Café · Reñaca, Viña del Mar · Hecho con ☕ y 🧿 en Chile</p>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Navbar scroll style
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.background =
+      window.scrollY > 50 ? 'rgba(18,8,4,.97)' : 'rgba(26,15,10,.92)';
+  });
+
+  // Intersection Observer for reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
