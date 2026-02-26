@@ -56,6 +56,32 @@
       background-size: 42px 42px;
     }
 
+    /* ─── PARALLAX ZEBRA BACKGROUND ────────────────── */
+    .parallax-zebra-bg {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-zebra-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('renaca.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      z-index: 0;
+      opacity: 0.15;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    .parallax-zebra-bg .section-wrap {
+      position: relative;
+      z-index: 1;
+    }
+
     /* ─── NAVBAR ────────────────────────────────────── */
     nav {
       position: fixed;
@@ -576,13 +602,21 @@
 
     /* Background image styles for specific menu cards */
     .menu-card.especialidad,
-    .menu-card.oriente {
+    .menu-card.oriente,
+    .menu-card.coffee-bg-1,
+    .menu-card.coffee-bg-2,
+    .menu-card.coffee-bg-3,
+    .menu-card.coffee-bg-4 {
       position: relative;
       overflow: hidden;
     }
 
     .menu-card.especialidad::before,
-    .menu-card.oriente::before {
+    .menu-card.oriente::before,
+    .menu-card.coffee-bg-1::before,
+    .menu-card.coffee-bg-2::before,
+    .menu-card.coffee-bg-3::before,
+    .menu-card.coffee-bg-4::before {
       content: '';
       position: absolute;
       inset: 0;
@@ -601,30 +635,78 @@
       background-image: url('arena.jpg');
     }
 
+    .menu-card.coffee-bg-1::before {
+      background-image: url('coffee01.jpg');
+    }
+
+    .menu-card.coffee-bg-2::before {
+      background-image: url('coffee02.jpg');
+    }
+
+    .menu-card.coffee-bg-3::before {
+      background-image: url('coffee03.jpg');
+    }
+
+    .menu-card.coffee-bg-4::before {
+      background-image: url('coffee04.jpg');
+    }
+
     .menu-card.especialidad:hover::before,
-    .menu-card.oriente:hover::before {
+    .menu-card.oriente:hover::before,
+    .menu-card.coffee-bg-1:hover::before,
+    .menu-card.coffee-bg-2:hover::before,
+    .menu-card.coffee-bg-3:hover::before,
+    .menu-card.coffee-bg-4:hover::before {
       transform: scale(1.05);
     }
 
     .menu-card.especialidad .card-icon,
     .menu-card.oriente .card-icon,
+    .menu-card.coffee-bg-1 .card-icon,
+    .menu-card.coffee-bg-2 .card-icon,
+    .menu-card.coffee-bg-3 .card-icon,
+    .menu-card.coffee-bg-4 .card-icon,
     .menu-card.especialidad .card-tag,
     .menu-card.oriente .card-tag,
+    .menu-card.coffee-bg-1 .card-tag,
+    .menu-card.coffee-bg-2 .card-tag,
+    .menu-card.coffee-bg-3 .card-tag,
+    .menu-card.coffee-bg-4 .card-tag,
     .menu-card.especialidad h3,
     .menu-card.oriente h3,
+    .menu-card.coffee-bg-1 h3,
+    .menu-card.coffee-bg-2 h3,
+    .menu-card.coffee-bg-3 h3,
+    .menu-card.coffee-bg-4 h3,
     .menu-card.especialidad p,
     .menu-card.oriente p,
+    .menu-card.coffee-bg-1 p,
+    .menu-card.coffee-bg-2 p,
+    .menu-card.coffee-bg-3 p,
+    .menu-card.coffee-bg-4 p,
     .menu-card.especialidad .card-price,
     .menu-card.oriente .card-price,
+    .menu-card.coffee-bg-1 .card-price,
+    .menu-card.coffee-bg-2 .card-price,
+    .menu-card.coffee-bg-3 .card-price,
+    .menu-card.coffee-bg-4 .card-price,
     .menu-card.especialidad .badge-sand,
-    .menu-card.oriente .badge-sand {
+    .menu-card.oriente .badge-sand,
+    .menu-card.coffee-bg-1 .badge-sand,
+    .menu-card.coffee-bg-2 .badge-sand,
+    .menu-card.coffee-bg-3 .badge-sand,
+    .menu-card.coffee-bg-4 .badge-sand {
       position: relative;
       z-index: 2;
     }
 
     /* Dark overlay for better text readability */
     .menu-card.especialidad::after,
-    .menu-card.oriente::after {
+    .menu-card.oriente::after,
+    .menu-card.coffee-bg-1::after,
+    .menu-card.coffee-bg-2::after,
+    .menu-card.coffee-bg-3::after,
+    .menu-card.coffee-bg-4::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -928,7 +1010,7 @@
   </section>
 
   <!-- HISTORIA -->
-  <section id="historia">
+  <section id="historia" class="parallax-zebra-bg">
     <div class="section-wrap">
       <div class="historia-grid">
         <div class="historia-text reveal">
@@ -1020,7 +1102,7 @@
   </section>
 
   <!-- MENÚ -->
-  <section id="menu">
+  <section id="menu" class="parallax-zebra-bg">
     <div class="section-wrap">
       <p class="section-label reveal">Nuestras Especialidades</p>
       <h2 class="section-title reveal">El <em>Menú</em> Estrella</h2>
@@ -1047,7 +1129,7 @@
           <div class="card-price">$4.200 CLP</div>
         </div>
 
-        <div class="menu-card reveal">
+        <div class="menu-card coffee-bg-1 reveal">
           <span class="card-icon">🍩</span>
           <p class="card-tag">Tradicionales</p>
           <h3>Donas con Miel y Pistacho</h3>
@@ -1056,7 +1138,7 @@
           <div class="card-price">$2.500 CLP</div>
         </div>
 
-        <div class="menu-card reveal">
+        <div class="menu-card coffee-bg-2 reveal">
           <span class="card-icon">🧊</span>
           <p class="card-tag">Para el verano</p>
           <h3>Café Turco Frío (Soğuk Kahve)</h3>
@@ -1065,7 +1147,7 @@
           <div class="card-price">$4.500 CLP</div>
         </div>
 
-        <div class="menu-card reveal">
+        <div class="menu-card coffee-bg-3 reveal">
           <span class="card-icon">🍵</span>
           <p class="card-tag">Para los que no toman café</p>
           <h3>Té Turco (Çay) con Narghile Herbs</h3>
@@ -1074,7 +1156,7 @@
           <div class="card-price">$2.900 CLP</div>
         </div>
 
-        <div class="menu-card reveal">
+        <div class="menu-card coffee-bg-4 reveal">
           <span class="card-icon">🥐</span>
           <p class="card-tag">Once Chileno-Otomano</p>
           <h3>Simit con Manjar y Queso</h3>
