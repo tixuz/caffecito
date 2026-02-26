@@ -59,22 +59,19 @@
     /* ─── PARALLAX ZEBRA BACKGROUND ────────────────── */
     .parallax-zebra-bg {
       position: relative;
-      overflow: hidden;
+      background-image: url('renaca.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
 
     .parallax-zebra-bg::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url('renaca.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+      background: linear-gradient(160deg, rgba(31, 14, 8, 0.85), rgba(13, 26, 23, 0.85));
       z-index: 0;
-      opacity: 0.15;
-      transform: translateZ(0);
-      will-change: transform;
     }
 
     .parallax-zebra-bg .section-wrap {
