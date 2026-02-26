@@ -147,11 +147,25 @@
       background-repeat: no-repeat;
       z-index: 0;
       opacity: 0.4;
+      animation: pulseZoom 8s ease-in-out infinite;
       transition: transform 0.5s ease;
     }
 
     #inicio:hover::before {
+      animation: none;
       transform: scale(1.05);
+    }
+
+    @keyframes pulseZoom {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.03);
+      }
     }
 
     .hero-decor {
